@@ -1,0 +1,1 @@
+(()=>{"use strict";window.addEventListener("load",(()=>alert("page loaded")))})();
