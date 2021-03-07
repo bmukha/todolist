@@ -3,16 +3,16 @@ import ProjectItem from "./projectItems.js";
 function getProjectsFromLocalStorage() {
   let currentProjects = [];
   if (isItemInLocalStorage("currentProjects")) {
-    currentProjects = [];
     let tempArray = JSON.parse(localStorage.getItem("currentProjects"));
-
-    tempArray.forEach(function (project) {
-      let tempProject = new ProjectItem(project.title);
-      tempProject.tasks = [...project.tasks];
-      currentProjects.push(tempProject);
-    });
-  } else {
-    currentProjects = [new ProjectItem("default project")];
+    if (tempArray.length) {
+      tempArray.forEach(function (project) {
+        let tempProject = new ProjectItem(project.title);
+        tempProject.tasks = [...project.tasks];
+        currentProjects.push(tempProject);
+      });
+    } else {
+      currentProjects = [new ProjectItem("default project")];
+    }
   }
   return currentProjects;
 }

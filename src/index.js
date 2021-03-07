@@ -3,7 +3,6 @@ import { renderProjects, renderTasks } from "./dom.js";
 import {
   getProjectsFromLocalStorage,
   saveProjectsToLocalStorage,
-  isItemInLocalStorage,
 } from "./storage.js";
 
 let currentProjects = getProjectsFromLocalStorage();

@@ -6,24 +6,49 @@ const main = document.querySelector("#main");
 function renderProjects(projects) {
   asideWrapper.innerHTML = "";
   if (projects.length) {
-    projects.forEach((element) => {
+    projects.forEach((element, index) => {
       const newProj = document.createElement("div");
       newProj.classList.add("project");
       newProj.id = element.id;
+      newProj.tabIndex = index;
       newProj.innerHTML = `
       <div id="title-and-close">
         <h3>${element.title}</h3>
-        <button class="close-icon"></button>
+        <button class="close-icon" style="display:none"></button>
       </div>`;
-      newProj.addEventListener("click", (event) => {
-        event.stopPropagation;
-        event.preventDefault;
-        console.log(event.currentTarget);
-        console.log(event.currentTarget.id);
+      newProj.addEventListener("mouseover", (event) => {
+        // event.stopPropagation();
+        // event.preventDefault();
+        console.log(currentProjects);
+        const newButton = document.querySelector(
+          `#${event.currentTarget.id} > button`
+        );
+        newButton.style.display = "block";
+        const closeButton = document.querySelector(
+          `#${event.currentTarget.id} > #title-and-close > button`
+        );
+        closeButton.style.display = "block";
+        let activeProject = currentProjects.find(
+          (element) => element.id == event.currentTarget.id
+        );
+        renderTasks(activeProject);
+      });
+      newProj.addEventListener("mouseout", (event) => {
+        // event.stopPropagation();
+        // event.preventDefault();
+        const newButton = document.querySelector(
+          `#${event.currentTarget.id} > button`
+        );
+        newButton.style.display = "none";
+        const closeButton = document.querySelector(
+          `#${event.currentTarget.id} > #title-and-close > button`
+        );
+        closeButton.style.display = "none";
       });
       asideWrapper.appendChild(newProj);
       const addNewButton = document.createElement("button");
       addNewButton.classList.add("addNewButton");
+      addNewButton.style.display = "none";
       addNewButton.textContent = "new task";
       addNewButton.addEventListener("click", () => {
         addNewTask(element);
