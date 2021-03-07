@@ -1,4 +1,7 @@
+import ProjectItem from "./projectItems.js";
+
 function getProjectsFromLocalStorage() {
+  let currentProjects = [];
   if (isItemInLocalStorage("currentProjects")) {
     currentProjects = [];
     let tempArray = JSON.parse(localStorage.getItem("currentProjects"));
@@ -6,9 +9,12 @@ function getProjectsFromLocalStorage() {
     tempArray.forEach(function (project) {
       let tempProject = new ProjectItem(project.title);
       tempProject.tasks = [...project.tasks];
+      currentProjects.push(tempProject);
     });
-    currentProjects.push(tempProject);
-  } else currentProjects = [];
+  } else {
+    currentProjects = [new ProjectItem("default project")];
+  }
+  return currentProjects;
 }
 
 function saveProjectsToLocalStorage(array) {
