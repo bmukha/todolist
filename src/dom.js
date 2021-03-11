@@ -76,12 +76,18 @@ function renderTasks(project) {
   project.tasks.forEach((item) => {
     const newDiv = document.createElement("div");
     newDiv.classList.add("task");
+    newDiv.classList.add(item.parentId);
+    newDiv.classList.add(item.taskId);
     newDiv.innerHTML = `<button class="close-icon"></button>
       <p>Title: ${item.title}</p>
       <p>Description: ${item.description}</p>
       <p>Due date: ${item.dueDate}</p>
       <p>Priority: ${item.priority}</p>`;
     main.appendChild(newDiv);
+    const deleteButton = document.querySelector(`.task.${item.parentId}.${item.taskId} > button`);
+    deleteButton.addEventListener('click', () => {
+      alert ('it works!');
+    })
   });
 }
 
