@@ -24,7 +24,6 @@ function renderProjects(projects) {
       });
       titleAndCloseDiv.appendChild(closeButton);
       newProj.appendChild(titleAndCloseDiv);
-
       newProj.addEventListener("mouseover", (event) => {
         const newButton = document.querySelector(
           `#${event.currentTarget.id} > button`
