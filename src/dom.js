@@ -17,9 +17,6 @@ function renderProjects(projects) {
         <button class="close-icon" style="display:none"></button>
       </div>`;
       newProj.addEventListener("mouseover", (event) => {
-        // event.stopPropagation();
-        // event.preventDefault();
-        console.log(currentProjects);
         const newButton = document.querySelector(
           `#${event.currentTarget.id} > button`
         );
@@ -84,23 +81,22 @@ function renderTasks(project) {
       <p>Due date: ${item.dueDate}</p>
       <p>Priority: ${item.priority}</p>`;
     main.appendChild(newDiv);
-    const deleteButton = document.querySelector(`.task.${item.parentId}.${item.taskId} > button`);
-    deleteButton.addEventListener('click', (event) => {
+    const deleteButton = document.querySelector(
+      `.task.${item.parentId}.${item.taskId} > button`
+    );
+    deleteButton.addEventListener("click", (event) => {
       const parentClasses = event.target.parentElement.classList;
       const parentId = parentClasses[1];
       const taskId = parentClasses[2];
-      console.log (parentId);
-      console.log (taskId);
-      const findedParent = currentProjects.find((element) => element.id == parentId);
-      console.log (findedParent);
-      const findedTaskIndex = findedParent.tasks.findIndex((element) => element.taskId == taskId);
-      console.log(findedTaskIndex);
+      const findedParent = currentProjects.find(
+        (element) => element.id == parentId
+      );
+      const findedTaskIndex = findedParent.tasks.findIndex(
+        (element) => element.taskId == taskId
+      );
       findedParent.tasks.splice(findedTaskIndex, 1);
       renderProjects(currentProjects);
       window.location.reload();
-
-
-
     });
   });
 }
