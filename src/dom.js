@@ -11,11 +11,20 @@ function renderProjects(projects) {
       newProj.classList.add("project");
       newProj.id = element.id;
       newProj.tabIndex = index;
-      newProj.innerHTML = `
-      <div id="title-and-close">
-        <h3>${element.title}</h3>
-        <button class="close-icon" style="display:none"></button>
-      </div>`;
+      const titleAndCloseDiv = document.createElement("div");
+      titleAndCloseDiv.id = "title-and-close";
+      const title = document.createElement("h3");
+      title.textContent = element.title;
+      titleAndCloseDiv.appendChild(title);
+      const closeButton = document.createElement("button");
+      closeButton.classList.add("close-icon");
+      closeButton.style = "display:none";
+      closeButton.addEventListener('click', (event) => {
+        alert ("it works!");
+      });
+      titleAndCloseDiv.appendChild(closeButton);
+      newProj.appendChild(titleAndCloseDiv);
+
       newProj.addEventListener("mouseover", (event) => {
         const newButton = document.querySelector(
           `#${event.currentTarget.id} > button`
