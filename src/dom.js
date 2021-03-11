@@ -85,9 +85,23 @@ function renderTasks(project) {
       <p>Priority: ${item.priority}</p>`;
     main.appendChild(newDiv);
     const deleteButton = document.querySelector(`.task.${item.parentId}.${item.taskId} > button`);
-    deleteButton.addEventListener('click', () => {
-      alert ('it works!');
-    })
+    deleteButton.addEventListener('click', (event) => {
+      const parentClasses = event.target.parentElement.classList;
+      const parentId = parentClasses[1];
+      const taskId = parentClasses[2];
+      console.log (parentId);
+      console.log (taskId);
+      const findedParent = currentProjects.find((element) => element.id == parentId);
+      console.log (findedParent);
+      const findedTaskIndex = findedParent.tasks.findIndex((element) => element.taskId == taskId);
+      console.log(findedTaskIndex);
+      findedParent.tasks.splice(findedTaskIndex, 1);
+      renderProjects(currentProjects);
+      window.location.reload();
+
+
+
+    });
   });
 }
 

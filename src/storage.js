@@ -8,6 +8,7 @@ function getProjectsFromLocalStorage() {
       tempArray.forEach(function (project) {
         let tempProject = new ProjectItem(project.title);
         tempProject.tasks = [...project.tasks];
+        tempProject.tasks.forEach(element => element.parentId = tempProject.id);
         currentProjects.push(tempProject);
       });
     } else {
