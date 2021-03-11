@@ -16,6 +16,12 @@ function renderProjects(projects) {
         <h3>${element.title}</h3>
         <button class="close-icon" style="display:none"></button>
       </div>`;
+      const deleteItemButton = document.querySelector(
+        `${newProj.id} > #title_and_close > .close_button`
+      );
+      deleteItemButton.addEventListener("click", () => {
+        alert("it works!");
+      });
       newProj.addEventListener("mouseover", (event) => {
         const newButton = document.querySelector(
           `#${event.currentTarget.id} > button`
