@@ -19,8 +19,16 @@ function renderProjects(projects) {
       const closeButton = document.createElement("button");
       closeButton.classList.add("close-icon");
       closeButton.style = "display:none";
-      closeButton.addEventListener('click', (event) => {
-        alert ("it works!");
+      closeButton.addEventListener("click", (event) => {
+        const parentId =
+          event.target.parentElement.parentElement.id;
+        const findedProjectIndex = currentProjects.findIndex(
+          (element) => element.id == parentId
+        );
+        currentProjects.splice(findedProjectIndex, 1);
+        saveProjectsToLocalStorage(currentProjects);
+        renderProjects(currentProjects);
+        window.location.reload();
       });
       titleAndCloseDiv.appendChild(closeButton);
       newProj.appendChild(titleAndCloseDiv);
